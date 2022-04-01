@@ -73,5 +73,54 @@
             }
         }
 
+        public override string ToString()
+        {
+            string str = "";
+
+            Node crnt = _head;
+            while (crnt != null)
+            {
+                str += $"{crnt.Value} ";
+                crnt = crnt.Next;
+            }
+
+            return str;
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool isEqual = true;
+            if (obj == null || !(obj is LinkedList))
+            {
+                isEqual = false;
+            }
+            else
+            {
+                LinkedList list = (LinkedList)obj;
+
+                if (list.Length != this.Length)
+                {
+                    isEqual = false;
+                }
+                else
+                {
+                    Node thisCrnt = this._head;
+                    Node listCrnt = list._head;
+
+                    while (thisCrnt != null)
+                    {
+                        if (thisCrnt.Value != listCrnt.Value)
+                        {
+                            isEqual = false;
+                        }
+
+                        thisCrnt = thisCrnt.Next;
+                        listCrnt = listCrnt.Next;
+                    }
+                }
+            }
+            return isEqual;
+        }
+
     }
 }
