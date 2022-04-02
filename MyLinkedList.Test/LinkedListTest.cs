@@ -69,6 +69,14 @@ namespace MyLinkedList.Test
             actualList.PopElemsFromStart(count);
             Assert.AreEqual(expectedList, actualList);
         }
+
+        [TestCaseSource(typeof(PopElemsByIndexTestSource))]
+        public void PopElemsByIndexTest(int index, int count, LinkedList list, LinkedList expectedList)
+        {
+            LinkedList actualList = list;
+            actualList.PopElemsByIndex(index, count);
+            Assert.AreEqual(expectedList, actualList);
+        }
     }
 
     public class AddTestSource : IEnumerable
@@ -141,6 +149,17 @@ namespace MyLinkedList.Test
             yield return new object[] { 0, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 1, 2, 3, 4 }) };
             yield return new object[] { 0, new LinkedList(new int[] { }), new LinkedList(new int[] { }) };
             yield return new object[] { 1, new LinkedList(new int[] { 3 }), new LinkedList(new int[] { }) };
+        }
+    }
+
+    public class PopElemsByIndexTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { 0, 2, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 3, 4 }) };
+            yield return new object[] { 0, 0, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 1, 2, 3, 4 }) };
+            yield return new object[] { 0, 4, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { }) };
+            yield return new object[] { 1, 2, new LinkedList(new int[] { 3, 5, 7, 9 }), new LinkedList(new int[] { 3, 9 }) };
         }
     }
 }

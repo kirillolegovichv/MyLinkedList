@@ -183,6 +183,19 @@
             }
         }
 
+        public void PopElemsByIndex(int index, int count)
+        {
+            if (count > Length)
+            {
+                throw new ArgumentException("count is wrong, count mustn't be higher than Length");
+            }
+            while (count != 0)
+            {
+                PopByIndex(index);
+                count--;
+            }
+        }
+
         public override string ToString()
         {
             string str = "";
