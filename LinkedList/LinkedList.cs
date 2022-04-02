@@ -39,7 +39,7 @@
 
         public LinkedList(int[] values)
         {
-            if (values == null)
+            if (values.Length == 0 || values == null)
             {
                 _head = null;
                 _tail = null;
@@ -172,7 +172,15 @@
 
         public void PopElemsFromStart(int count)
         {
-
+            if (count > Length)
+            {
+                throw new ArgumentException("count is wrong, count mustn't be higher than Length");
+            }
+            while (count != 0)
+            {
+                PopFromStart();
+                count--;
+            }
         }
 
         public override string ToString()
@@ -191,37 +199,33 @@
 
         public override bool Equals(object obj)
         {
-            bool isEqual = true;
             if (obj == null || !(obj is LinkedList))
             {
-                isEqual = false;
+                return false;
             }
-            else
+
+            LinkedList list = (LinkedList)obj;
+
+            if (list.Length != this.Length)
             {
-                LinkedList list = (LinkedList)obj;
-
-                if (list.Length != this.Length)
-                {
-                    isEqual = false;
-                }
-                else
-                {
-                    Node thisCrnt = this._head;
-                    Node listCrnt = list._head;
-
-                    while (thisCrnt != null)
-                    {
-                        if (thisCrnt.Value != listCrnt.Value)
-                        {
-                            isEqual = false;
-                        }
-
-                        thisCrnt = thisCrnt.Next;
-                        listCrnt = listCrnt.Next;
-                    }
-                }
+                return false;
             }
-            return isEqual;
+
+            Node thisCrnt = this._head;
+            Node listCrnt = list._head;
+
+            while (thisCrnt != null)
+            {
+                if (thisCrnt.Value != listCrnt.Value)
+                {
+                    return false;
+                }
+
+                thisCrnt = thisCrnt.Next;
+                listCrnt = listCrnt.Next;
+            }
+
+            return true;
         }
 
         private Node GetNodeByIndex(int index)
