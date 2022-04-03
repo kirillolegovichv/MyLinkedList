@@ -91,6 +91,14 @@ namespace MyLinkedList.Test
             int actual = list.FirstIndexByElem(elem);
             Assert.AreEqual(expected, actual);
         }
+
+        [TestCaseSource(typeof(ChangeElemByIndexTestSource))]
+        public void ChangeElemByIndexTest(int index, int value, LinkedList list, LinkedList expectedList)
+        {
+            LinkedList actualList = list;
+            actualList.ChangeElemByIndex(index, value);
+            Assert.AreEqual(expectedList, actualList);
+        }
     }
 
     public class AddTestSource : IEnumerable
@@ -196,6 +204,17 @@ namespace MyLinkedList.Test
             yield return new object[] { 1, new LinkedList(new int[] { 1 }), 0 };
             yield return new object[] { 3, new LinkedList(new int[] { 1, 2, 3, 4 }), 2 };
             yield return new object[] { 9, new LinkedList(new int[] { 3, 5, 7, 9 }), 3 };
+        }
+    }
+
+    public class ChangeElemByIndexTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { 0, 5, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 5, 2, 3, 4 }) };
+            yield return new object[] { 1, 5, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 1, 5, 3, 4 }) };
+            yield return new object[] { 3, 5, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 1, 2, 3, 5}) };
+            yield return new object[] { 0, 2, new LinkedList(new int[] { 3 }), new LinkedList(new int[] { 2 }) };
         }
     }
 }

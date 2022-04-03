@@ -202,12 +202,7 @@
             {
                 throw new Exception("Index out of range");
             }
-            Node crnt = _head;
-            while (index != 0)
-            {
-                crnt = crnt.Next;
-                index--;
-            }
+            Node crnt = GetNodeByIndex(index);
             return crnt.Value;
         }
 
@@ -224,6 +219,16 @@
                 crnt = crnt.Next;
             }
             return index;
+        }
+
+        public void ChangeElemByIndex(int index, int value)
+        {
+            if (index < 0 || index >= Length)
+            {
+                throw new Exception("Index out of range");
+            }
+            Node crnt = GetNodeByIndex(index);
+            crnt.Value = value;
         }
 
         public override string ToString()
