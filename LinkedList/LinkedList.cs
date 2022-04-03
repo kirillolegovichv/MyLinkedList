@@ -196,6 +196,36 @@
             }
         }
 
+        public int ReturnElementByIndex(int index)
+        {
+            if (index < 0 || index >= Length)
+            {
+                throw new Exception("Index out of range");
+            }
+            Node crnt = _head;
+            while (index != 0)
+            {
+                crnt = crnt.Next;
+                index--;
+            }
+            return crnt.Value;
+        }
+
+        public int FirstIndexByElem(int elem)
+        {
+            int index = -1;
+            Node crnt = _head;
+            for (int i = 0; i < Length; i++)
+            {
+                if (crnt.Value == elem)
+                {
+                    index = i;
+                }
+                crnt = crnt.Next;
+            }
+            return index;
+        }
+
         public override string ToString()
         {
             string str = "";
