@@ -231,6 +231,122 @@
             crnt.Value = value;
         }
 
+        public void Reverse()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Empty, nthng to reverse");
+            }
+
+            Node crnt = _head;
+            Node tmp;
+
+            while (crnt.Next != null)
+            {
+                tmp = crnt.Next;
+                crnt.Next = tmp.Next;
+                tmp.Next = _head;
+                _head = tmp;
+            }
+            _tail = crnt;
+        }
+
+        public int GetMaxElem()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Empty, nthng to find");
+            }
+
+            Node crnt = _head;
+            int max = crnt.Value;
+
+            while (crnt != null)
+            {
+                if (crnt.Value > max)
+                {
+                    max = crnt.Value;
+                }
+                crnt = crnt.Next;
+            }
+
+            return max;
+        }
+
+        public int GetMinElem()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Empty, nthng to find");
+            }
+
+            Node crnt = _head;
+            int min = crnt.Value;
+
+            while (crnt != null)
+            {
+                if (crnt.Value < min)
+                {
+                    min = crnt.Value;
+                }
+                crnt = crnt.Next;
+            }
+
+            return min;
+        }
+
+        public int GetIndexOfMaxElem()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Empty");
+            }
+
+            Node crnt = _head;
+            int max = crnt.Value;
+            int index = 0;
+            int indexOfMax = 0;
+
+            while (crnt != null)
+            {
+                if (crnt.Value > max)
+                {
+                    max = crnt.Value;
+                    indexOfMax = index;
+                }
+                index++;
+                crnt = crnt.Next;
+            }
+
+            return indexOfMax;
+        }
+
+        public int GetIndexOfMinElem()
+        {
+            if (Length == 0)
+            {
+                throw new Exception("Empty, nthng to find");
+            }
+
+            Node crnt = _head;
+            int min = crnt.Value;
+            int index = 0;
+            int indexOfMin = 0;
+
+            while (crnt != null)
+            {
+                if (crnt.Value < min)
+                {
+                    min = crnt.Value;
+                    indexOfMin = index;
+                }
+                index++;
+                crnt = crnt.Next;
+            }
+
+            return indexOfMin;
+        }
+
         public override string ToString()
         {
             string str = "";

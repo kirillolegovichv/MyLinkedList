@@ -99,6 +99,42 @@ namespace MyLinkedList.Test
             actualList.ChangeElemByIndex(index, value);
             Assert.AreEqual(expectedList, actualList);
         }
+
+        [TestCaseSource(typeof(ReverseTestSource))]
+        public void ReverseTest(LinkedList list, LinkedList expectedList)
+        {
+            LinkedList actualList = list;
+            actualList.Reverse();
+            Assert.AreEqual(expectedList, actualList);
+        }
+
+        [TestCaseSource(typeof(GetMaxElemTestSource))]
+        public void GetMaxElemTest(LinkedList list, int expected)
+        {
+            int actual = list.GetMaxElem();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCaseSource(typeof(GetMinElemTestSource))]
+        public void GetMinElemTest(LinkedList list, int expected)
+        {
+            int actual = list.GetMinElem();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCaseSource(typeof(GetIndexOfMaxElemTestSource))]
+        public void GetIndexOfMaxElemTest(LinkedList list, int expected)
+        {
+            int actual = list.GetIndexOfMaxElem();
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCaseSource(typeof(GetIndexOfMinElemTestSource))]
+        public void GetIndexOfMinElemTest(LinkedList list, int expected)
+        {
+            int actual = list.GetIndexOfMinElem();
+            Assert.AreEqual(expected, actual);
+        }
     }
 
     public class AddTestSource : IEnumerable
@@ -215,6 +251,60 @@ namespace MyLinkedList.Test
             yield return new object[] { 1, 5, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 1, 5, 3, 4 }) };
             yield return new object[] { 3, 5, new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 1, 2, 3, 5}) };
             yield return new object[] { 0, 2, new LinkedList(new int[] { 3 }), new LinkedList(new int[] { 2 }) };
+        }
+    }
+
+    public class ReverseTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { new LinkedList(new int[] { 1, 2, 3, 4 }), new LinkedList(new int[] { 4, 3, 2, 1 }) };
+            yield return new object[] { new LinkedList(new int[] { 1, 2, 3, 4, 5}), new LinkedList(new int[] { 5, 4, 3, 2, 1 }) };
+            yield return new object[] { new LinkedList(new int[] { 1 }), new LinkedList(new int[] { 1 }) };
+        }
+    }
+
+    public class GetMaxElemTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { new LinkedList(new int[] { 1, 2, 3, 4 }), 4 };
+            yield return new object[] { new LinkedList(new int[] { 1 }), 1 };
+            yield return new object[] { new LinkedList(new int[] { 5, 2, 1, 4 }), 5 };
+            yield return new object[] { new LinkedList(new int[] { 3, 5, 7, 9, 1 }), 9 };
+        }
+    }
+
+    public class GetMinElemTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] {new LinkedList(new int[] { 1, 2, 3, 4 }), 1 };
+            yield return new object[] {new LinkedList(new int[] { 1 }), 1 };
+            yield return new object[] {new LinkedList(new int[] { 5, 2, 1, 4 }), 1 };
+            yield return new object[] {new LinkedList(new int[] { 3, 5, 7, 9, 1 }), 1 };
+        }
+    }
+
+    public class GetIndexOfMaxElemTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { new LinkedList(new int[] { 1, 2, 3, 4 }), 3 };
+            yield return new object[] { new LinkedList(new int[] { 1 }), 0 };
+            yield return new object[] { new LinkedList(new int[] { 5, 2, 1, 4 }), 0 };
+            yield return new object[] { new LinkedList(new int[] { 3, 5, 7, 9, 1 }), 3 };
+        }
+    }
+
+    public class GetIndexOfMinElemTestSource : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            yield return new object[] { new LinkedList(new int[] { 1, 2, 3, 4 }), 0 };
+            yield return new object[] { new LinkedList(new int[] { 1 }), 0 };
+            yield return new object[] { new LinkedList(new int[] { 5, 2, 1, 4 }), 2 };
+            yield return new object[] { new LinkedList(new int[] { 3, 5, 7, 9, 1 }), 4 };
         }
     }
 }
