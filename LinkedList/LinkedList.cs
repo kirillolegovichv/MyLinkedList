@@ -347,6 +347,38 @@
             return indexOfMin;
         }
 
+        public void AscendingSort()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                for (int j = i + 1; j < Length; j++)
+                {
+                    if (GetNodeByIndex(j).Value < GetNodeByIndex(i).Value)
+                    {
+                        Node tmp = new Node(GetNodeByIndex(i).Value);
+                        GetNodeByIndex(i).Value = GetNodeByIndex(j).Value;
+                        GetNodeByIndex(j).Value = tmp.Value;
+                    }
+                }
+            }
+        }
+
+        public void DescendingSort()
+        {
+            for (int i = 0; i < Length; i++)
+            {
+                for (int j = i + 1; j < Length; j++)
+                {
+                    if (GetNodeByIndex(j).Value > GetNodeByIndex(i).Value)
+                    {
+                        Node tmp = new Node(GetNodeByIndex(i).Value);
+                        GetNodeByIndex(i).Value = GetNodeByIndex(j).Value;
+                        GetNodeByIndex(j).Value = tmp.Value;
+                    }
+                }
+            }
+        }
+
         public override string ToString()
         {
             string str = "";
